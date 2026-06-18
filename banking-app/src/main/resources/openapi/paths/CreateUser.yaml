@@ -1,0 +1,33 @@
+post:
+  summary: Create user
+  operationId: createUser
+  tags:
+    - User
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/CreateUserRequest' # Ссылка на схему в основном файле
+
+  responses:
+    '201':
+      description: User created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CreateUserResponse' # Ссылка на схему в основном файле
+
+    '400':
+      description: Invalid request
+
+    '409':
+      description: User with this email already exists
+
+components:
+  schemas:
+    CreateUserRequest:
+      $ref: './components/CreateUserRequest.yaml'
+    CreateUserResponse:
+      $ref: './components/CreateUserResponse.yaml'

@@ -1,0 +1,20 @@
+# Игнорировать каталог сборки Maven
+target/
+
+# Исключение для Maven Wrapper
+!.mvn/wrapper/maven-wrapper.jar
+
+# Игнорировать файлы IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Игнорировать файлы других редакторов
+*.swp  # Vim временные файлы
+._*    # MacOS файлы с метаданными
+.DS_Store # MacOS директория
+
+# Игнорировать логи и окружения
+*.log
+.env

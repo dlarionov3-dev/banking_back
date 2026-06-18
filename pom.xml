@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.dlarionov3-dev</groupId>
+    <artifactId>banking_back</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <distributionManagement>
+        <repository>
+            <id>bankingBack</id>
+            <name>bankingBack project</name>
+            <!-- https://maven.pkg.github.com/ Это базовый URL (хост) сервиса GitHub Packages, специально предназначенный для пакетов Maven. Он всегда одинаков для всех пользователей. -->
+            <url>https://maven.pkg.github.com/dlarionov3-dev/BankingApp1</url>
+        </repository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:https://github.com/dlarionov3-dev/BankingApp1.git</connection>
+        <developerConnection>scm:git:https://github.com/dlarionov3-dev/BankingApp1.git</developerConnection>
+        <url>https://github.com/dlarionov3-dev/BankingApp1</url>
+    </scm>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.0.6</version>
+    </parent>
+
+    <modules>
+        <module>banking-domain</module>
+        <module>banking-persistence</module>
+        <module>banking-command</module>
+        <module>banking-query</module>
+        <module>banking-app</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jrpc-server.version>3.1.0.RELEASE</jrpc-server.version>
+        <openapi-starter.version>2.8.5</openapi-starter.version>
+        <lombok.version>1.18.46</lombok.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <maven.compiler.plugin.version>3.15.0</maven.compiler.plugin.version>
+        <springboot.maven.plugin.version>4.0.6</springboot.maven.plugin.version>
+        <enforcer.plugin.version>3.5.0</enforcer.plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.github.dlarionov3-dev</groupId>
+                <artifactId>banking-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.dlarionov3-dev</groupId>
+                <artifactId>banking-persistence</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.dlarionov3-dev</groupId>
+                <artifactId>banking-command</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.dlarionov3-dev</groupId>
+                <artifactId>banking-query</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.dlarionov3-dev</groupId>
+                <artifactId>banking-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${openapi-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.devh</groupId>
+                <artifactId>grpc-server-spring-boot-starter</artifactId>
+                <version>${jrpc-server.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${springboot.maven.plugin.version}</version>
+                    <configuration>
+                        <!-- Эта настройка будет применяться ко всем модулям по умолчанию, исключаем в потомках возможность быть исполняемыми по-умолчанию -->
+                        <executable>false</executable>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                            <!-- Явно отключаем репакинг по умолчанию -->
+                            <configuration>
+                                <enabled>false</enabled>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+                    <configuration>
+                        <source>21</source>
+                        <target>21</target>
+                        <annotationProcessorPaths>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>${lombok.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.mapstruct</groupId>
+                                <artifactId>mapstruct-processor</artifactId>
+                                <version>${mapstruct.version}</version>
+                            </path>
+                        </annotationProcessorPaths>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${enforcer.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-required-files</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <phase>validate</phase> <!-- Привязываею к фазе validate -->
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <rules>
+                            <requireFilesExist>
+                                <!-- Указываю файлы, которые должны существовать -->
+                                <files>
+                                    <file>src/main/resources/application.yml</file>
+                                </files>
+                            </requireFilesExist>
+                        </rules>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>

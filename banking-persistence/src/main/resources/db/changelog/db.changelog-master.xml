@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001" author="Larionov">
+        <sqlFile path="schemas/001-create-users.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sql>DROP TABLE IF EXISTS users CASCADE;</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="002" author="Larionov">
+        <sqlFile path="schemas/002-create-user-profiles.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sql>DROP TABLE IF EXISTS user_profiles CASCADE;</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="003" author="Larionov">
+        <sqlFile path="schemas/003-create-accounts.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sql>DROP TABLE IF EXISTS accounts CASCADE;</sql>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="004" author="Larionov">
+        <sqlFile path="schemas/004-create-transactions.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sql>DROP TABLE IF EXISTS transactions CASCADE;</sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

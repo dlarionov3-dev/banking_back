@@ -1,0 +1,8 @@
+openapi: 3.0.3
+info:
+  title: API для работы с пользователями и операциями
+  description: API для работы с пользователями и операциями
+  version: 1.0.0
+paths:
+  /api/v1/users:
+    $ref: './paths/CreateUser.yaml'

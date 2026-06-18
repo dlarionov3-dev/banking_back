@@ -1,0 +1,27 @@
+type: object
+required:
+  - email
+  - firstName
+  - lastName
+properties:
+  email:
+    type: string
+    format: email
+    maxLength: 255
+
+  firstName:
+    type: string
+    maxLength: 100
+
+  lastName:
+    type: string
+    maxLength: 100
+
+  patronymic:
+    type: string
+    maxLength: 100
+    nullable: true
+
+  dateOfBirth:
+    type: string
+    format: date
