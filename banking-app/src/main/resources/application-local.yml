@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5431/virtualthreads
+    username: postgres
+    password: password
+    hikari:
+      virtual-threads: true
+      maximum-pool-size: 8
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  threads:
+    virtual:
+      enabled: true
+
+logging:
+  level:
+    root: INFO
+    com.github.dlarionov3-dev: DEBUG
