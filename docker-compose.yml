@@ -1,10 +1,10 @@
 services:
   postgres:
-    image: postgres:16-alpine
     container_name: postgres
+    image: postgres:16-alpine
     restart: no
     environment:
-      POSTGRES_DB: virtualthreads
+      POSTGRES_DB: banking
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:

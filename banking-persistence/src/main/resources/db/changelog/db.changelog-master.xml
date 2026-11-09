@@ -35,4 +35,11 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="005" author="Larionov">
+        <sqlFile path="schemas/005-generate-data-users.sql" relativeToChangelogFile="true"/>
+        <rollback>
+            <sql>DROP TABLE IF EXISTS transactions CASCADE;</sql>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
